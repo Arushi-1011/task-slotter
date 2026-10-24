@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>task-slotter demo</title>
+<style>
+  body{font-family:system-ui,sans-serif;max-width:760px;margin:2rem auto;padding:0 1rem;line-height:1.4}
+  .sub{color:#666;margin-top:0}
+  fieldset{margin:1rem 0;border:1px solid #ccc;border-radius:8px}
+  label{margin-right:1rem}
+  input,button{font:inherit;padding:.3rem .5rem}
+  .row{display:flex;gap:.5rem;margin:.4rem 0;flex-wrap:wrap;align-items:center}
+  .slot{padding:.5rem .75rem;border-radius:6px;margin:.3rem 0;background:#dbeafe;color:#111;display:flex;justify-content:space-between;gap:1rem}
+  .slot.bad{background:#fee2e2}
+</style>
+</head>
+<body>
+<h1>task-slotter</h1>
+<p class="sub">Live demo of the npm package.
+  <a href="https://www.npmjs.com/package/task-slotter">npm</a> ·
+  <a href="https://github.com/Arushi-1011/task-slotter">GitHub</a></p>
+
+<fieldset><legend>Your day</legend>
+  <label>Start <input id="start" type="time" value="09:00"></label>
+  <label>End <input id="end" type="time" value="21:00"></label>
+  <label>Break (min) <input id="brk" type="number" value="10" min="0" style="width:4rem"></label>
+</fieldset>
+
+<fieldset><legend>Busy blocks</legend>
+  <div id="busy"></div><button id="addBusy">+ Busy block</button>
+</fieldset>
+
+<fieldset><legend>Tasks (priority 1 = most important)</legend>
+  <div id="tasks"></div><button id="addTask">+ Task</button>
+</fieldset>
+
+<button id="go">Schedule</button>
+<h2>Result</h2>
+<div id="out"></div>
+
+<script type="module">
+import { schedule } from "https://cdn.jsdelivr.net/npm/task-slotter@0.1.0/+esm";
+
+const $ = (s) => document.querySelector(s);
+const today = new Date().toLocaleDateString("en-CA");   // local YYYY-MM-DD
+const at = (hhmm) => `${today}T${hhmm}`;
+
+// --- 1. input rows -------------------------------------------------
+function addRow(parent, html) {
+  const row = document.createElement("div");
+  row.className = "row";
+  row.innerHTML = html + '<button class="x">✕</button>';
+  row.querySelector(".x").onclick = () => row.remove();
+  $(parent).append(row);
+}
+const addBusy = (s = "13:00", e = "14:00") =>
+  addRow("#busy", `<input class="s" type="time" value="${s}"> to <input class="e" type="time" value="${e}">`);
+const addTask = (t = "", d = 60, p = 1) =>
+  addRow("#tasks", `<input class="t" placeholder="Task name" value="${t}">
+    <input class="d" type="number" min="1" value="${d}" style="width:4.5rem"> min
+    priority <input class="p" type="number" min="1" value="${p}" style="width:3.5rem">`);
+
+// --- 2. read the form, call the package ------------------------------
+function run() {
+  const tasks = [...document.querySelectorAll("#tasks .row")].map((r, i) => ({
+    id: String(i),
+    title: r.querySelector(".t").value || `Task ${i + 1}`,
+    duration: +r.querySelector(".d").value,
+    priority: +r.querySelector(".p").value,
+  }));
+  const busy = [...document.querySelectorAll("#busy .row")].map((r) => ({
+    start: at(r.querySelector(".s").value),
+    end: at(r.querySelector(".e").value),
+  }));
+
+  const result = schedule(tasks, {
+    start: at($("#start").value),
+    end: at($("#end").value),
+    busy,
+    breakMinutes: +$("#brk").value,
+  });
+  render(result, tasks);
+}
+
+// --- 3. draw the result (textContent only, so user text can't inject HTML)
+function render(result, tasks) {
+  const out = $("#out");
+  out.replaceChildren();
+  const name = Object.fromEntries(tasks.map((t) => [t.id, t.title]));
+  const line = (cls, left, right) => {
+    const d = document.createElement("div");
+    d.className = "slot " + cls;
+    const a = document.createElement("span"); a.textContent = left;
+    const b = document.createElement("span"); b.textContent = right;
+    d.append(a, b);
+    out.append(d);
+  };
+  [...result.scheduled]
+    .sort((a, b) => a.start.localeCompare(b.start))
+    .forEach((s) => line("", name[s.id], `${s.start.slice(11)} – ${s.end.slice(11)}`));
+  result.unscheduled.forEach((u) => line("bad", name[u.id], u.reason));
+  if (!tasks.length) out.textContent = "Add a task first.";
+}
+
+$("#addBusy").onclick = () => addBusy();
+$("#addTask").onclick = () => addTask();
+$("#go").onclick = run;
+
+addBusy();
+addTask("DSA practice", 90, 1);
+addTask("SE report", 60, 2);
+addTask("Gym", 45, 3);
+run();
+</script>
+</body>
+</html>
