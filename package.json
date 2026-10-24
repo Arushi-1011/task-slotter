@@ -1,0 +1,24 @@
+{
+  "name": "task-slotter",
+  "version": "0.1.0",
+  "description": "Pure-function task scheduler: fits tasks into free time windows by deadline and priority.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": ["src"],
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "test": "vitest run"
+  },
+  "keywords": ["scheduler", "planner", "tasks", "time-blocking"],
+  "author": "Arushi Srivastava",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arushi-1011/task-slotter.git"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.5"
+  }
+}
