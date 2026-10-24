@@ -25,6 +25,7 @@
   <label>Start <input id="start" type="time" value="09:00"></label>
   <label>End <input id="end" type="time" value="21:00"></label>
   <label>Break (min) <input id="brk" type="number" value="10" min="0" style="width:4rem"></label>
+  <label><input id="wh" type="checkbox"> Working hours only (09:00–17:00)</label>
 </fieldset>
 
 <fieldset><legend>Busy blocks</legend>
@@ -40,7 +41,7 @@
 <div id="out"></div>
 
 <script type="module">
-import { schedule } from "https://cdn.jsdelivr.net/npm/task-slotter@0.1.0/+esm";
+import { schedule } from "https://cdn.jsdelivr.net/npm/task-slotter@0.2.0/+esm";
 
 const $ = (s) => document.querySelector(s);
 const today = new Date().toLocaleDateString("en-CA");   // local YYYY-MM-DD
@@ -74,11 +75,12 @@ function run() {
     end: at(r.querySelector(".e").value),
   }));
 
-  const result = schedule(tasks, {
+    const result = schedule(tasks, {
     start: at($("#start").value),
     end: at($("#end").value),
     busy,
     breakMinutes: +$("#brk").value,
+    workingHours: $("#wh").checked ? { start: "09:00", end: "17:00" } : undefined,
   });
   render(result, tasks);
 }
