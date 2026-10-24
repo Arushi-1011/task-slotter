@@ -1,4 +1,6 @@
 # task-slotter
+[![test](https://github.com/Arushi-1011/task-slotter/actions/workflows/test.yml/badge.svg)](https://github.com/Arushi-1011/task-slotter/actions)
+[![npm](https://img.shields.io/npm/v/task-slotter)](https://www.npmjs.com/package/task-slotter)
 
 Fit tasks into your free time. A tiny, dependency-free scheduler that places tasks around busy blocks by deadline and priority.
 
