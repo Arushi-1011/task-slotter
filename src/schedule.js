@@ -1,18 +1,23 @@
 // src/schedule.js
 import { getFreeWindows, toMs, fromMs } from "./windows.js";
+import { outsideHours } from "./hours.js";
 
 const MIN = 60_000;
 
 const byDeadlineThenPriority = (a, b) => {
   const da = a.deadline ? toMs(a.deadline) : Infinity;
   const db = b.deadline ? toMs(b.deadline) : Infinity;
-  if (da !== db) return da - db;                 // earliest deadline first
-  return (a.priority ?? 5) - (b.priority ?? 5);  // then 1 before 2 before 3
+  if (da !== db) return da - db;
+  return (a.priority ?? 5) - (b.priority ?? 5);
 };
 
 export function schedule(tasks, options) {
-  const { start, end, busy = [], breakMinutes = 0 } = options;
-  const windows = getFreeWindows(start, end, busy);
+  const { start, end, busy = [], breakMinutes = 0, workingHours } = options;
+
+  const blocked = workingHours
+    ? [...busy, ...outsideHours(start, end, workingHours)]
+    : busy;
+  const windows = getFreeWindows(start, end, blocked);
 
   const scheduled = [];
   const unscheduled = [];
@@ -35,7 +40,7 @@ export function schedule(tasks, options) {
     }
 
     scheduled.push({ id: task.id, start: fromMs(w.start), end: fromMs(w.start + need) });
-    w.start += need + breakMinutes * MIN; // shrink the window from the left
+    w.start += need + breakMinutes * MIN;
   }
 
   return { scheduled, unscheduled };

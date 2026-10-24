@@ -7,6 +7,7 @@ Fit tasks into your free time. A tiny, dependency-free scheduler that places tas
 **[Live demo](https://arushi-1011.github.io/task-slotter/)**
 
 ## Install
+Ships with TypeScript types, no @types package needed
 
 ```bash
 npm install task-slotter
@@ -50,6 +51,7 @@ const result = schedule(
 | `start`, `end` | string | the scheduling window |
 | `busy` | `{start, end}[]` | blocked time, may overlap |
 | `breakMinutes` | number | gap after each task, default 0 |
+| `workingHours` | `{start, end}` | `"HH:mm"` daily window; tasks only land inside it. Multi-day ranges work. |
 
 Returns `{ scheduled, unscheduled }`. Unscheduled reasons: `"no free slot long enough"` or `"would miss deadline"`.
 
@@ -66,6 +68,7 @@ Returns the free gaps between busy blocks as `{start, end}` millisecond timestam
 ## Limitations
 
 Greedy first-fit is fast but not optimal. Fitting tasks into windows is a bin-packing variant, so some inputs have a valid arrangement this will miss.
+no task splitting and no overnight working hours
 
 ## License
 

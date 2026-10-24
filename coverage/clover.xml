@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1792870870990" clover="3.2.0">
+  <project timestamp="1792870870990" name="All files">
+    <metrics statements="54" coveredstatements="54" conditionals="31" coveredconditionals="29" methods="13" coveredmethods="13" elements="98" coveredelements="96" complexity="0" loc="54" ncloc="54" packages="1" files="3" classes="3"/>
+    <file name="hours.js" path="/Users/arushi/Downloads/Task-Slotter/src/hours.js">
+      <metrics statements="14" coveredstatements="14" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <line num="4" count="414" type="stmt"/>
+      <line num="8" count="207" type="stmt"/>
+      <line num="9" count="207" type="stmt"/>
+      <line num="10" count="207" type="cond" truecount="2" falsecount="0"/>
+      <line num="11" count="1" type="stmt"/>
+      <line num="14" count="206" type="stmt"/>
+      <line num="15" count="206" type="stmt"/>
+      <line num="16" count="206" type="stmt"/>
+      <line num="18" count="206" type="stmt"/>
+      <line num="19" count="206" type="stmt"/>
+      <line num="20" count="464" type="stmt"/>
+      <line num="21" count="464" type="stmt"/>
+      <line num="25" count="464" type="stmt"/>
+      <line num="27" count="206" type="stmt"/>
+    </file>
+    <file name="schedule.js" path="/Users/arushi/Downloads/Task-Slotter/src/schedule.js">
+      <metrics statements="23" coveredstatements="23" conditionals="22" coveredconditionals="20" methods="4" coveredmethods="4"/>
+      <line num="5" count="2" type="stmt"/>
+      <line num="7" count="2" type="stmt"/>
+      <line num="8" count="2537" type="cond" truecount="2" falsecount="0"/>
+      <line num="9" count="2537" type="cond" truecount="2" falsecount="0"/>
+      <line num="10" count="2537" type="cond" truecount="2" falsecount="0"/>
+      <line num="11" count="1052" type="cond" truecount="2" falsecount="2"/>
+      <line num="15" count="410" type="cond" truecount="2" falsecount="0"/>
+      <line num="17" count="410" type="cond" truecount="2" falsecount="0"/>
+      <line num="20" count="410" type="stmt"/>
+      <line num="22" count="410" type="stmt"/>
+      <line num="23" count="410" type="stmt"/>
+      <line num="25" count="410" type="stmt"/>
+      <line num="26" count="1675" type="stmt"/>
+      <line num="27" count="1675" type="cond" truecount="2" falsecount="0"/>
+      <line num="29" count="1675" type="stmt"/>
+      <line num="30" count="2165" type="cond" truecount="2" falsecount="0"/>
+      <line num="33" count="1675" type="cond" truecount="2" falsecount="0"/>
+      <line num="34" count="366" type="stmt"/>
+      <line num="35" count="288" type="stmt"/>
+      <line num="39" count="288" type="stmt"/>
+      <line num="42" count="1387" type="stmt"/>
+      <line num="43" count="1387" type="stmt"/>
+      <line num="46" count="409" type="stmt"/>
+    </file>
+    <file name="windows.js" path="/Users/arushi/Downloads/Task-Slotter/src/windows.js">
+      <metrics statements="17" coveredstatements="17" conditionals="7" coveredconditionals="7" methods="7" coveredmethods="7"/>
+      <line num="2" count="13267" type="cond" truecount="2" falsecount="0"/>
+      <line num="4" count="22184" type="stmt"/>
+      <line num="6" count="5546" type="stmt"/>
+      <line num="7" count="5546" type="stmt"/>
+      <line num="11" count="414" type="stmt"/>
+      <line num="12" count="414" type="stmt"/>
+      <line num="14" count="414" type="stmt"/>
+      <line num="15" count="1763" type="stmt"/>
+      <line num="16" count="1763" type="stmt"/>
+      <line num="17" count="2071" type="stmt"/>
+      <line num="19" count="414" type="stmt"/>
+      <line num="20" count="414" type="stmt"/>
+      <line num="21" count="414" type="stmt"/>
+      <line num="22" count="1464" type="cond" truecount="2" falsecount="0"/>
+      <line num="23" count="1464" type="stmt"/>
+      <line num="25" count="414" type="cond" truecount="2" falsecount="0"/>
+      <line num="27" count="414" type="stmt"/>
+    </file>
+  </project>
+</coverage>
