@@ -67,8 +67,7 @@ Returns the free gaps between busy blocks as `{start, end}` millisecond timestam
 
 ## Limitations
 
-Greedy first-fit is fast but not optimal. Fitting tasks into windows is a bin-packing variant, so some inputs have a valid arrangement this will miss.
-no task splitting and no overnight working hours
+Greedy first-fit is fast but not optimal. Fitting tasks into windows is a bin-packing variant, so some inputs have a valid arrangement this will miss. Tasks are never split across windows, and overnight working hours (e.g. 22:00 to 02:00) aren't supported yet.
 
 ## License
 
