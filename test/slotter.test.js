@@ -80,3 +80,35 @@ describe("schedule", () => {
     expect(() => schedule(tasks, { start: t("09:00"), end: t("10:00") })).not.toThrow();
   });
 });
+describe("workingHours", () => {
+  const hours = { start: "09:00", end: "17:00" };
+
+  it("keeps tasks inside working hours", () => {
+    const { scheduled } = schedule(
+      [{ id: "a", duration: 60, priority: 1 }],
+      { start: "2026-10-24T06:00", end: "2026-10-24T20:00", workingHours: hours }
+    );
+    expect(scheduled).toEqual([{ id: "a", start: "2026-10-24T09:00", end: "2026-10-24T10:00" }]);
+  });
+
+  it("spills into the next day when today is full", () => {
+    const { scheduled } = schedule(
+      [{ id: "a", duration: 300, priority: 1 }, { id: "b", duration: 300, priority: 2 }],
+      { start: "2026-10-24T09:00", end: "2026-10-25T21:00", workingHours: hours }
+    );
+    expect(scheduled).toEqual([
+      { id: "a", start: "2026-10-24T09:00", end: "2026-10-24T14:00" },
+      { id: "b", start: "2026-10-25T09:00", end: "2026-10-25T14:00" },
+    ]);
+  });
+
+  it("rejects invalid working hours", () => {
+    expect(() =>
+      schedule([], {
+        start: "2026-10-24T09:00",
+        end: "2026-10-24T21:00",
+        workingHours: { start: "18:00", end: "09:00" },
+      })
+    ).toThrow(RangeError);
+  });
+});
