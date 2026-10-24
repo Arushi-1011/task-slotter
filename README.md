@@ -4,6 +4,8 @@
 
 Fit tasks into your free time. A tiny, dependency-free scheduler that places tasks around busy blocks by deadline and priority.
 
+**[Live demo](https://arushi-1011.github.io/task-slotter/)**
+
 ## Install
 
 ```bash
