@@ -25,7 +25,7 @@
   <label>Start <input id="start" type="time" value="09:00"></label>
   <label>End <input id="end" type="time" value="21:00"></label>
   <label>Break (min) <input id="brk" type="number" value="10" min="0" style="width:4rem"></label>
-  <label><input id="wh" type="checkbox"> Working hours only (09:00–17:00)</label>
+  <label><input id="wh" type="checkbox"> Working hours (9-5)</label>
 </fieldset>
 
 <fieldset><legend>Busy blocks</legend>
@@ -59,7 +59,7 @@ const addBusy = (s = "13:00", e = "14:00") =>
   addRow("#busy", `<input class="s" type="time" value="${s}"> to <input class="e" type="time" value="${e}">`);
 const addTask = (t = "", d = 60, p = 1) =>
   addRow("#tasks", `<input class="t" placeholder="Task name" value="${t}">
-    <input class="d" type="number" min="1" value="${d}" style="width:4.5rem"> min
+    <input class="d" type="number" min="1" value="${d}" style="width:4.5rem"> min ·
     priority <input class="p" type="number" min="1" value="${p}" style="width:3.5rem">`);
 
 // --- 2. read the form, call the package ------------------------------
