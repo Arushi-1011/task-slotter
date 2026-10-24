@@ -7,7 +7,9 @@
     ".": "./src/index.js"
   },
   "files": ["src"],
-  "engines": { "node": ">=18" },
+  "engines": { "node": ">=20" },
+  "homepage": "https://arushi-1011.github.io/task-slotter/",
+  "bugs": { "url": "https://github.com/Arushi-1011/task-slotter/issues" },
   "scripts": {
     "test": "vitest run"
   },
